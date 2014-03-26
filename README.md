@@ -4,7 +4,7 @@ gradle-bash-completion
 Bash completion for gradle
 
 
-Copy gradle into /etc/bash_completion.d/
+Copy gradle into /etc/bash_completion.d/  
 Copy completion.gradle into /etc/gradle/
 
 
