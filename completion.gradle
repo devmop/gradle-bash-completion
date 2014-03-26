@@ -1,0 +1,5 @@
+rootProject {
+  task bashCompletion << {
+    tasks.all { if (it != bashCompletion && it.name[0] != '-') {println it.name}}
+  }
+}

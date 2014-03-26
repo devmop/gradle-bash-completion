@@ -1,0 +1,11 @@
+_gradle()
+{
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  local gradle_cmd="gradle -I /etc/gradle/completion.gradle"
+ 
+  local commands=''
+ 
+  commands=$($gradle_cmd -q bashCompletion | tr '\n' ' ')
+  COMPREPLY=( $(compgen -W "$commands" -- $cur) )
+}
+complete -F _gradle gradle
