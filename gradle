@@ -1,6 +1,5 @@
 _gradle()
 {
-
   set +e
   local cur=${COMP_WORDS[COMP_CWORD]}
   _get_comp_words_by_ref -n : cur
@@ -19,6 +18,7 @@ _gradle()
     commands=$(cat $cache_dir/$gradle_files_checksum)
   else
     commands=$($gradle_cmd -q bashCompletion | tr '\n' ' ')
+    commands=$(echo $commands | sed 's/:/\\:/g')
     echo $commands > $cache_dir/$gradle_files_checksum
   fi
   COMPREPLY=( $(compgen -W "$commands" -- $cur) )
