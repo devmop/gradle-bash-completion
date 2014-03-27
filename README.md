@@ -10,6 +10,5 @@ Copy completion.gradle into /etc/gradle/
 
 Inspired by https://gist.github.com/nolanlawson/8694399 and http://www.practicalgradle.org/blog/2011/02/task-auto-completion-on-the-command-line/
 
-The results currently aren't cached as completion then won't function as expected with gradle builds that import ant ones.
-
-As a result it feels slow even with the gradle daemon running.
+The results are now cached but it might not work well with build.xml
+It doesn't work well with multiproject builds yet. Bash doesn't play nicely with colons

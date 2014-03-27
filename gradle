@@ -1,11 +1,27 @@
 _gradle()
 {
+
+  set +e
   local cur=${COMP_WORDS[COMP_CWORD]}
+  _get_comp_words_by_ref -n : cur
   local gradle_cmd="gradle -I /etc/gradle/completion.gradle"
+
+  local cache_dir='/scratch/.gradle/completion'
+  mkdir -p $cache_dir
  
   local commands=''
- 
-  commands=$($gradle_cmd -q bashCompletion | tr '\n' ' ')
+
+  local gradle_files_checksum='absent'
+  if [[ -f build.gradle ]]; then
+    gradle_files_checksum="$(pwd | sed 's/\//1/g')-$(stat -c %Y build.gradle)"
+  fi
+  if [[ -f "$cache_dir/$gradle_files_checksum" ]]; then
+    commands=$(cat $cache_dir/$gradle_files_checksum)
+  else
+    commands=$($gradle_cmd -q bashCompletion | tr '\n' ' ')
+    echo $commands > $cache_dir/$gradle_files_checksum
+  fi
   COMPREPLY=( $(compgen -W "$commands" -- $cur) )
+  __ltrim_colon_completions "$cur"
 }
 complete -F _gradle gradle
