@@ -5,7 +5,7 @@ _gradle()
   _get_comp_words_by_ref -n : cur
   local gradle_cmd="gradle -I /etc/gradle/completion.gradle"
 
-  local cache_dir='/scratch/.gradle/completion'
+  local cache_dir="${GRADLE_USER_HOME-$HOME/.gradle}/completion"
   mkdir -p $cache_dir
  
   local commands=''
