@@ -1,5 +1,5 @@
-rootProject {
+allprojects {
   task bashCompletion << {
-    tasks.all { if (it != bashCompletion && it.name[0] != '-') {println it.name}}
+    project.tasks.all { if (it != bashCompletion && it.name[0] != '-') {println it.path.substring(1)}}
   }
 }
