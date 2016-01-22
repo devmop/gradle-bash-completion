@@ -24,4 +24,4 @@ _gradle()
   COMPREPLY=( $(compgen -W "$commands" -- $cur) )
   __ltrim_colon_completions "$cur"
 }
-complete -F _gradle gradle
+complete -F _gradle gradle gradlew
